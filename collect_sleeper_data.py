@@ -97,13 +97,19 @@ class League(object):
 			display += team.display_counts()
 		print(display)
 
+
 class Team(object):
 	"""Represents a team within a league on Sleeper."""
 
 	def __init__(self, manager_info, roster_info):
 		self.user_id = manager_info['user_id']
 		self.display_name = manager_info['display_name']
-		# self.team_name = manager_info['metadata']['team_name'] Does not work but should according to the documentation.
+		# If a user has not set a team_name then the attribute is missing
+		# entirely from the get request.
+		try:
+			self.team_name = manager_info['metadata']['team_name']
+		except KeyError:
+			self.team_name = ''
 		self.roster_id = roster_info['roster_id']
 		self.roster = roster_info['players']
 		self.waiver_count = 0

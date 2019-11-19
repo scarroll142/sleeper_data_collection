@@ -1,10 +1,11 @@
 import requests
 import json
 
-from practice_file import User
+from collect_sleeper_data import User
 
 BASE_USER_URL = 'https://api.sleeper.app/v1/user/'
 
+#TODO fix this function and decide whether or not to move it elsewhere.
 def get_user_info():
 	valid_name = False
 	while valid_name is False:
